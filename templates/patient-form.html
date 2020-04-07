@@ -1,0 +1,148 @@
+<!DOCTYPE html> {% load static%}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eHealth</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .title {
+            text-align: center;
+            margin: 20px;
+        }
+        
+        .hello-msg {
+            font-size: 18px;
+            color: #fff;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img src="{% static 'signin/image/logo.png' %}" height="80" width="80">
+        <button class=" navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarNav " aria-controls="navbarNav " aria-expanded="false " aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav ">
+            <ul class="navbar-nav ">
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item  ">
+                    <a class="nav-link " href=" {% url 'statics' %}">Dashboard</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link " href=" {% url 'admin' %}">Patient Table</a>
+                </li>
+                {% endif %}
+                <li class="nav-item ">
+                    <a class="nav-link active " href="{% url 'userform' %} ">Patient Form</a>
+                </li>
+            </ul>
+        </div>
+
+        <span class="hello-msg ">Hello, {{request.user}}</span>
+        <span><a class="hello-msg " href="{% url 'logout' %} ">Logout</a></span>
+
+    </nav>
+    <h1 class="title"><span style="margin: 20px;">Patient Registration Form</span></h1>
+
+    <div class="container">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Patient Name</label>
+                    <input type="text" name="patientName" required class="form-control" id="inputEmail4" placeholder="Full Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4"> Phone Number</label>
+                    <input type="text" name="patientNumber" required class="form-control" id="inputPassword4" placeholder="Phone Number">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" name="patientAddress" required class="form-control" id="inputAddress" placeholder="1234 oyabo Street ">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" name="patientcity" required class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">patient Sex</label>
+                    <select name="patientSex" id="inputState" class="form-control">
+                    <option selected>Sex</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+
+                </select>
+                </div>
+
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Date of Birth</label>
+                    <input name="patientDOB" type="date" lass="form-control" id="inputEmail4" placeholder="Full Name"> </div>
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Health Care Number</label>
+                    <input type="tel" name="careNumber" class="form-control" id="inputEmail4" placeholder="Health Care Number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">Marital Status</label>
+                    <select name="MaritalStatus" id="inputState" class="form-control">
+                        <option selected>Single</option>
+                        <option>Married</option>
+                        <option>Divorced</option>
+                        <option>Widowed</option>
+                    
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <!-- <label for="inputEmail4">Patient Sickness</label>
+                    <input type="text" name="sickness" class="form-control" id="inputEmail4" placeholder="Sickness"> -->
+                    <label for="inputState">Patient Sickness</label>
+                    <select name="sickness" id="inputState" class="form-control">
+                            <option selected>Malaria</option>
+                            <option>Covid 19</option>
+                            <option>Typhoid fever</option>
+                            <option>Kidney Stone</option>
+
+                            <option>Tooth Decay</option>
+
+                        </select>
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Registration Location</label>
+                    <input type="text" name="RegistrationLocation" class="form-control" id="inputEmail4" placeholder="Registration Location">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Family Doctor Name</label>
+                    <input type="text" name="doctorName" class="form-control" id="inputEmail4" placeholder='Family Doctor Name '>
+                </div>
+            </div>
+
+
+            <div class=""><button type="submit" class="btn btn-warning  btn-lg btn-block displayed"> Submit </button></div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

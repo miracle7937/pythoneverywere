@@ -1,0 +1,109 @@
+<!DOCTYPE html> {% load static %}
+
+
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eHealth</title>
+
+    <link rel="stylesheet" href="{% static 'table/app.scss' %}">
+
+    <link rel="stylesheet" href="{% static 'table/main.css' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .hello-msg {
+            font-size: 18px;
+            color: #fff;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <img src="{% static 'signin/image/logo.png' %}" height="80" width="80">
+        <button class=" navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarNav " aria-controls="navbarNav " aria-expanded="false " aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav ">
+            <ul class="navbar-nav ">
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item  ">
+                    <a class="nav-link " href=" {% url 'statics' %}">Dashboard</a>
+                </li>
+                <li class="nav-item active ">
+                    <a class="nav-link " href=" {% url 'admin' %}">Patient <Table></Table></a>
+                </li>
+                {% endif %}
+                <li class="nav-item ">
+                    <a class="nav-link  " href="{% url 'userform' %} ">Patient Form</a>
+                </li>
+            </ul>
+        </div>
+
+        <span class="hello-msg ">Hello, {{request.user}}</span>
+        <span><a class="hello-msg " href="{% url 'logout' %} ">Logout</a></span>
+
+    </nav>
+
+
+
+    <h1><span>Hospital Patient </span> <span>Record</span></h1>
+
+
+    <form>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput"> Patient Name</label>
+                <!-- <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe"> -->
+                {{myFilter.form.sickness}}
+            </div>
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput">Patient Sickness</label> {{myFilter.form.patientName}}
+                <!-- <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe"> -->
+            </div>
+
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="responstable">
+
+        <tr>
+            <th>Patient Name</th>
+            <th data-th="Driver details"><span>Address</span></th>
+            <th>City</th>
+            <th>Sex</th>
+            <th>Health Care Number</th>
+            <th>Patient Sickness</th>
+        </tr>
+        {% for patient in patients%}
+        <tr>
+            <td>{{patient.patientName}}</td>
+            <td>{{patient.patientAddress}}</td>
+            <td>{{patient.patientcity}}</td>
+            <td>{{patient.patientSex}}</td>
+            <td>{{patient.careNumber}}</td>
+            <td>{{patient.sickness}}</td>
+        </tr>
+
+        {% endfor %}
+
+
+
+    </table>
+
+
+</body>
+
+</html>

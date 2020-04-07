@@ -1,0 +1,77 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eHealth</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {
+            packages: ["corechart"]
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            console.log(parseInt('{{ mal }}'))
+            var data = google.visualization.arrayToDataTable([
+                ['Malaria', 'Disease Chart'],
+                ['Malaria', parseInt('{{ mal }}')],
+                ['Covid 19', parseInt('{{ cov }}')],
+                ['Typhoid fever', parseInt('{{ typ }}')],
+                ['Kidney Stone', parseInt('{{ stone }}')],
+                ['Tooth Decay', parseInt('{{ tooth }}')]
+            ]);
+
+            var options = {
+                title: 'Disease Chart',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
+    <style>
+        .message {
+            background-color: green;
+            height: 30px;
+            text-align: center;
+            margin: 20px;
+            color: white;
+        }
+        
+        .styleText {
+            font-size: 20px;
+            float: right;
+            padding: 45px;
+        }
+    </style>
+</head>
+
+
+<body>
+    {% include 'mainNav.html'%} {% for message in messages %}
+    <li>
+        <div class="message">
+            <p> {{message}}</p>
+        </div>
+    </li>
+    {% endfor %}
+
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <div class="styleText">
+        <div class="container">
+            Typhoid fever, also known simply as typhoid, is a bacterial infection due to a specific type of Salmonella that causes symptoms. Symptoms may vary from mild to severe, and usually begin 6 to 30 days after exposure.Often there is a gradual onset of a high
+            fever over several days. This is commonly accompanied by weakness, abdominal pain, constipation, headaches, and mild vomiting.Some people develop a skin rash with rose colored spots.In severe cases, people may experience confusion. Without
+            treatment, symptoms may last weeks or months. Diarrhea is uncommon. Other people may carry the bacterium without being affected; however, they are still able to spread the disease to others. Typhoid fever is a type of enteric fever, along
+            with paratyphoid fever.
+        </div>
+    </div>
+
+</body>
+
+</html>
