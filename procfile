@@ -1,0 +1,1 @@
+web: gunicorn EHealth.wsgi --log-file
