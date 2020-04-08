@@ -25,7 +25,7 @@ SECRET_KEY = '65&jds6p#br5yu=ov^juxnh6k56ae!djhgu-blsxvc+ryxqq-e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['pythontestappeheath.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['ehealthproject.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
